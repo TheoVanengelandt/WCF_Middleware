@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.ServiceModel.Web;
 using System.ServiceModel;
 
 namespace Middleware
@@ -8,13 +7,12 @@ namespace Middleware
 	[ServiceContract]
 	public interface IAuth
 	{
-		//"Do It" -> HTTP PUT  
 		[OperationContract]
 		string UserLogin(string userName, string password, string appToken);
 		//string Login(LoginDataType loginData);
 	}
 
-	// Utilisez un contrat de données comme indiqué dans l'exemple ci-après pour ajouter les types composites aux opérations de service.
+	// Utilisez un contrat de données pour ajouter les types composites aux opérations de service.
 	[DataContract]
 	public class LoginDataType
 	{

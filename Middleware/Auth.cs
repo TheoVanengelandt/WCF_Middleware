@@ -3,13 +3,11 @@ using System.ServiceModel;
 
 namespace Middleware
 {
-	// REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" dans le code, le fichier svc et le fichier de configuration.
-	// REMARQUE : pour lancer le client test WCF afin de tester ce service, sélectionnez Service1.svc ou Service1.svc.cs dans l'Explorateur de solutions et démarrez le débogage.
-	public class Auth : Middleware.IAuth
+	public class Auth : IAuth
 	{
 		string UserToken = string.Empty;
 
-		//Method to validate user token
+		// Method to validate user token
 		public bool IsValidateUser()
 		{
 			//Getting the user token from client request  
@@ -20,11 +18,11 @@ namespace Middleware
 
 			string userIdentityToken = Convert.ToString(OperationContext.Current.IncomingMessageHeaders.GetHeader<string>("TokenHeader", "TokenNameSpace"));
 
-			//Authenticating user with token, if it is validated then returning employee data  
+			// Authenticating user with token
 			return userIdentityToken == UserToken;
 		}
 
-		//Method to validate user creadentials and the app token
+		// Method to validate user creadentials and the app token
 		public string UserLogin(string userName, string password, string appToken)
 		{
 			if (appToken != "apptoken")
@@ -32,7 +30,7 @@ namespace Middleware
 				throw new Exception("Invalid app token");
 			}
 
-			//Validating user with static values, you can validate from database  
+			//Validating user with static values, will be change by data from database  
 			if (userName == "theo" && password == "123")
 			{
 				//If user is validated then returning current session id as user token  
@@ -46,12 +44,13 @@ namespace Middleware
 			return UserToken;
 		}
 
-		//Check if content of the request is not null
+		// NOT USED YET
+		// Check if content of the request is not null
 		public string Login(LoginDataType loginData)
 		{
 			if (loginData == null)
 			{
-				throw new ArgumentNullException("loginData null");
+				throw new ArgumentNullException("Data login null");
 			}
 
 			return UserLogin(loginData.Login, loginData.Password, loginData.AppToken);
