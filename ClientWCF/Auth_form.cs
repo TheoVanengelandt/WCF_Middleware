@@ -15,7 +15,6 @@ namespace ClientWCF
 
 			this.msg = new STC_MSG();
 			this.client = new AuthClient("authTcp");
-
 		}
 
 		private void Btn_go_Click(object sender, EventArgs e)
