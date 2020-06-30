@@ -59,10 +59,12 @@ namespace ClientWCF
 			this.msg = msg;
 			this.msg.op_name = "authentifier";
 			this.msg.app_name = "Middleware";
-			this.msg.app_token = "12345";
+			this.msg.app_token = "apptoken";
 			this.msg.app_version = "2.0";
 			this.msg.op_info = "Demande de service de l'application 1 de version 2.0";
 
+			// send login, password, apptoken
+			// return token user
 			this.msg = this.prox.Login(this.msg);
 		}
 	}
