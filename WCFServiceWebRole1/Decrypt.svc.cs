@@ -43,7 +43,7 @@ namespace WCFServiceWebRole1
 						}
 						catch (Exception e)
 						{
-							throw new Exception("C'ets de la merde le code JEE = " + e);
+							throw new Exception("C'est de la merde le code JEE = " + e);
 						}
 					}
 					else
@@ -65,7 +65,6 @@ namespace WCFServiceWebRole1
 
 		private bool CheckUserToken(STC_MSG msg)
 		{
-
 			// L'orchestration et la gestion transactionnelle doivent être mise en oeuvre ici.
 			/* To handle with database connection
 			int count = -1;

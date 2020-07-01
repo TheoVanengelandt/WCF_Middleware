@@ -22,7 +22,6 @@ namespace WCFServiceWebRole1
 		{
 		}
 
-		[PrincipalPermission(SecurityAction.Demand, Role = @"BUILTIN\Utilisateurs")]
 		public STC_MSG Login(STC_MSG msg)
 		{
 			this.msg = msg;
@@ -46,27 +45,6 @@ namespace WCFServiceWebRole1
 
 		public bool CheckRequest(STC_MSG msg)
 		{
-
-			OperationContext context = OperationContext.Current;
-			MessageProperties msgProp = context.IncomingMessageProperties;
-			RemoteEndpointMessageProperty remoteProp = msgProp[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
-			ServiceSecurityContext ssc = ServiceSecurityContext.Current;
-
-
-			Console.ForegroundColor = ConsoleColor.Blue;
-			Console.WriteLine("Demande entrente : " + "<" + ssc.WindowsIdentity.Name + ">" + ssc.WindowsIdentity.User);
-			Console.WriteLine("Adresse cliente : " + remoteProp.Address);
-			Console.WriteLine("Port client : " + remoteProp.Port);
-			Console.WriteLine("Détail du message ->");
-			Console.WriteLine("Application cliente : " + msg.app_name);
-			Console.WriteLine("Application token : " + msg.app_token);
-			Console.WriteLine("Application version : " + msg.app_version);
-			Console.WriteLine("Opération info : " + msg.op_info);
-			Console.WriteLine("Opération nom : " + msg.op_name);
-			Console.WriteLine("Opération statut : " + msg.op_statut);
-			Console.WriteLine("Utilisteur login : " + msg.user_login);
-			Console.WriteLine("Utilisteur password : " + msg.user_psw);
-			Console.WriteLine("Utilisteur token : " + msg.user_token);
 
 			if (msg.data != null)
 			{
