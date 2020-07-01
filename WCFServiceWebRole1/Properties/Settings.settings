@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WCFServiceWebRole1.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WCFServiceWebRole1_ProxyDecrypt_ProjetService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://51.210.103.59:11080/ProjetService/ProjetServiceBean</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

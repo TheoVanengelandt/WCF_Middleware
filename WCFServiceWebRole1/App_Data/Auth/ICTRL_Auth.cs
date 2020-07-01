@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Middleware
+namespace WCFServiceWebRole1
 {
 	interface ICTRL_Auth
 	{

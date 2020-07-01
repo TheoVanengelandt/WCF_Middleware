@@ -1,17 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Text;
 
-namespace Middleware
+namespace WCFServiceWebRole1
 {
-    public class Auth : IAuth
+	public class Auth : IAuth
 	{
 		private STC_MSG msg;
 
 		public Auth()
 		{
 			this.msg = new STC_MSG();
+		}
+
+		public void DoWork()
+		{
 		}
 
 		[PrincipalPermission(SecurityAction.Demand, Role = @"BUILTIN\Utilisateurs")]

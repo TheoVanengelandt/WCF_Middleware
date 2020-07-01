@@ -1,4 +1,4 @@
-﻿namespace Middleware
+﻿namespace WCFServiceWebRole1
 {
 	class SQL_Request
 	{

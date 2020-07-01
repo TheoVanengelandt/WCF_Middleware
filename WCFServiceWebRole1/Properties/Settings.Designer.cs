@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Middleware.Properties {
+namespace WCFServiceWebRole1.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -27,9 +27,9 @@ namespace Middleware.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://51.210.103.59:11080/ProjetService/ProjetServiceBean")]
-        public string Middleware_proxyDecrypt_ProjetService {
+        public string WCFServiceWebRole1_ProxyDecrypt_ProjetService {
             get {
-                return ((string)(this["Middleware_proxyDecrypt_ProjetService"]));
+                return ((string)(this["WCFServiceWebRole1_ProxyDecrypt_ProjetService"]));
             }
         }
     }

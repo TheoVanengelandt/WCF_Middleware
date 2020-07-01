@@ -1,9 +1,13 @@
-﻿using Middleware.proxyDecrypt;
-using System;
-using System.Runtime.Serialization.Formatters.Binary;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
 using System.Xml;
+using WCFServiceWebRole1.ProxyDecrypt;
 
-namespace Middleware
+namespace WCFServiceWebRole1
 {
 	class Decrypt : IDecrypt
 	{
@@ -22,7 +26,7 @@ namespace Middleware
 			{
 				if (msg.op_name == "decrypter")
 				{
-					if(CheckUserToken(this.msg))
+					if (CheckUserToken(this.msg))
 					{
 						// Method used to decrypt files
 						// this.msg = DecryptClass.DecrytpMethod(this.msg);
@@ -90,7 +94,7 @@ namespace Middleware
 			return this.msg.op_statut;
 		}
 
-		private string GenerateXml (STC_MSG msg)
+		private string GenerateXml(STC_MSG msg)
 		{
 			XmlDocument doc = new XmlDocument();
 
@@ -132,7 +136,7 @@ namespace Middleware
 
 			// user_login
 			XmlNode loginNode = doc.CreateElement("user_login");
-			loginNode.AppendChild(doc.CreateTextNode(msg.user_login != null? msg.user_login.ToString() : "null"));
+			loginNode.AppendChild(doc.CreateTextNode(msg.user_login != null ? msg.user_login.ToString() : "null"));
 			msgNode.AppendChild(loginNode);
 
 			// user_psw
@@ -149,7 +153,7 @@ namespace Middleware
 			XmlNode dataNode = doc.CreateElement("data");
 			msgNode.AppendChild(dataNode);
 
-			if(msg.data != null)
+			if (msg.data != null)
 			{
 				// attributs
 				for (int fileIndex = 0; fileIndex < msg.data.Length; fileIndex++)

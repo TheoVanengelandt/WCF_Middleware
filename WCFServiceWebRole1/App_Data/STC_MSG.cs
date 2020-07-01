@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Middleware
+namespace WCFServiceWebRole1
 {
 	[DataContract]
 	public struct STC_MSG

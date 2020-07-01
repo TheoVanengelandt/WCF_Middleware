@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace Middleware.proxyDecrypt {
+namespace WCFServiceWebRole1.ProxyDecrypt {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -36,7 +36,7 @@ namespace Middleware.proxyDecrypt {
         /// <remarks/>
         public ProjetService() {
             this.SoapVersion = System.Web.Services.Protocols.SoapProtocolVersion.Soap12;
-            this.Url = global::Middleware.Properties.Settings.Default.Middleware_proxyDecrypt_ProjetService;
+            this.Url = global::WCFServiceWebRole1.Properties.Settings.Default.WCFServiceWebRole1_ProxyDecrypt_ProjetService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
