@@ -31,9 +31,10 @@ namespace Middleware_Host
 		static void Ini_serv()
 		{
 			int i;
-
+			/*
 			Program.host = new ServiceHost(typeof(Middleware.Auth));
 			Program.host2 = new ServiceHost(typeof(Middleware.Decrypt));
+			*/
 
 			Console.ForegroundColor = ConsoleColor.Yellow;
 			Console.WriteLine("Initialisation du serveur...veuillez patienter");
