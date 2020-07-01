@@ -61,8 +61,6 @@ namespace Middleware
 				Console.ForegroundColor = ConsoleColor.Green;
 				Console.WriteLine("\n" + host.State.ToString());
 			}
-
-
 		}
 	}
 }

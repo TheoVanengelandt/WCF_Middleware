@@ -4,7 +4,7 @@
   <xs:element name="decodageResponse" type="tns:decodageResponse" />
   <xs:complexType name="decodage">
     <xs:sequence>
-      <xs:element minOccurs="0" name="textName" type="xs:string" />
+      <xs:element minOccurs="0" name="STC_MSG" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="decodageResponse">
