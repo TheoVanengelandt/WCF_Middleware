@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace Middleware
 {
-    class Decrypt : IDecrypt
+	public class Decrypt : IDecrypt
     {
         private STC_MSG msg;
 

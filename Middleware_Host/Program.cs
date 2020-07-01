@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
+using System.Text;
 
-namespace Middleware
+namespace Middleware_Host
 {
 	class Program
 	{
 		private static ServiceHost host;
+		private static ServiceHost host2;
 
 		static void Main(string[] args)
 		{
 			Program.Headup();
-			Program.Ini_serv();
+			// Program.Ini_serv();
 			Console.Read();
 		}
 
@@ -28,14 +32,18 @@ namespace Middleware
 		{
 			int i;
 
-			Program.host = new ServiceHost(typeof(Auth));
+			Program.host = new ServiceHost(typeof(Middleware.Auth));
+			Program.host2 = new ServiceHost(typeof(Middleware.Decrypt));
 
 			Console.ForegroundColor = ConsoleColor.Yellow;
 			Console.WriteLine("Initialisation du serveur...veuillez patienter");
 
 			try
 			{
+				/*
 				host.Open();
+				host2.Open();
+				*/
 				Console.WriteLine("<--Serveur ouvert-->\n");
 
 				for (i = 0; i < host.Description.Endpoints.Count; i++)
@@ -44,11 +52,11 @@ namespace Middleware
 					Console.WriteLine("Description du service {0}", i);
 
 					Console.ForegroundColor = ConsoleColor.Yellow; // Console style
-					Console.WriteLine("Adresse : " + host.Description.Endpoints[i].Address);
-					Console.WriteLine("Binding : " + host.Description.Endpoints[i].Binding);
-					Console.WriteLine("Contract Type : " + host.Description.Endpoints[i].Contract.ContractType);
-					Console.WriteLine("Contract Name : " + host.Description.Endpoints[i].Contract.Name);
-					Console.WriteLine("Uri : " + host.Description.Endpoints[i].ListenUri.Host);
+					Console.WriteLine("host Adresse : " + host.Description.Endpoints[i].Address);
+					Console.WriteLine("host Uri : " + host.Description.Endpoints[i].ListenUri.Host);
+
+					Console.WriteLine("host2 Adresse : " + host2.Description.Endpoints[i].Address);
+					Console.WriteLine("host2 Uri : " + host2.Description.Endpoints[i].ListenUri.Host);
 				}
 			}
 			catch (Exception ex)
@@ -60,6 +68,7 @@ namespace Middleware
 				Console.WriteLine("\n<--  Fin de l'initialisation  -->");
 				Console.ForegroundColor = ConsoleColor.Green;
 				Console.WriteLine("\n" + host.State.ToString());
+				Console.WriteLine("\n" + host2.State.ToString());
 			}
 		}
 	}
