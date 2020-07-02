@@ -24,20 +24,23 @@ namespace Middleware
                 {
                     if (CheckUserToken(this.msg))
                     {
+
 						// Method used to decrypt files
 						Semaphore _pool = new Semaphore(0, 6);
 
 						List<string> keyList = new GenKey().GetList();
-
-						Task.Factory.StartNew(() => {
+						this.msg = new XorCracker(keyList).Crack(msg);
+						/*
+						Task.Run(() => {
 							_pool.WaitOne();
 
 							this.msg = new XorCracker(keyList).Crack(msg);
 
 							_pool.Release();
 						});
-                    }
-                    else
+						*/
+					}
+					else
                     {
                         this.msg.op_info = "User token invalid";
                         this.msg.user_token = "";
