@@ -53,6 +53,8 @@
     <Compile Include="CTRL_Auth.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Decrypt.cs" />
+    <Compile Include="XOR\genKey.cs" />
+    <Compile Include="XOR\XorCracker.cs" />
     <Compile Include="IAuth.cs" />
     <Compile Include="ICTRL_Auth.cs" />
     <Compile Include="IDecrypt.cs" />
