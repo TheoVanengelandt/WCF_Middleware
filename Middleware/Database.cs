@@ -4,56 +4,58 @@ using System.Data.SqlClient;
 
 namespace Middleware
 {
-	internal class Database
-	{
-		private STC_MSG msg;
+    internal class Database
+    {
+        private STC_MSG msg;
 
-		private readonly SqlConnection cnx;
+        private readonly SqlConnection cnx;
 
-		public Database()
-		{
-			this.msg = new STC_MSG();
-			this.cnx = new SqlConnection();
+        public Database()
+        {
+            this.msg = new STC_MSG();
+            this.cnx = new SqlConnection();
 
-			//information about the remote server
-			string server = "51.210.103.59";
-			string port = "3306";
-			string database = "ProjetDev_db";
-			string username = "sa";
-			string password = "Exiacesi62000";
+            //information about the remote server
+            string server = "51.210.103.59";
+            string port = "3306";
+            string database = "ProjetDev_db";
+            string username = "sa";
+            string password = "Exiacesi62000";
 
-			this.cnx.ConnectionString = "Data Source=" + server + ";Initial Catalog=" + database + ";User Id=" + username + ";Password=" + password + ";";
-		}
+            this.cnx.ConnectionString = "Data Source=" + server + "," + port + ";Initial Catalog=" + database + ";User Id=" + username + ";Password=" + password + ";";
+        }
 
-		public STC_MSG SelectByLoginPsw(STC_MSG msg)
-		{
-			this.msg = msg;
+        public STC_MSG SelectByLoginPsw(STC_MSG msg)
+        {
+            this.msg = msg;
 
-			string log = msg.user_login;
-			string psw = msg.user_psw;
+            string log = msg.user_login;
+            string psw = msg.user_psw;
 
-			using (SqlConnection cnx = new SqlConnection(this.cnx.ConnectionString))
-			{
-				try
-				{
-					cnx.Open();
+            // temp value for simulate database
+            this.msg.op_statut = (msg.user_psw == "123");
+            return this.msg;
 
-					//querie to check if the user's informations match
-					SqlCommand sqlcmd = new SqlCommand("select count(1) from InfoUser where login=@login and pwd = sha1(@pwd)", this.cnx);
-					sqlcmd.Parameters.AddWithValue("@login", log);
-					sqlcmd.Parameters.AddWithValue("@pwd", psw);
+            using (SqlConnection cnx = new SqlConnection(this.cnx.ConnectionString))
+            {
+                try
+                {
+                    cnx.Open();
 
-					Console.Write("Response request SQL " + sqlcmd.ExecuteScalar());
+                    //querie to check if the user's informations match
+                    SqlCommand sqlcmd = new SqlCommand("select count(1) from InfoUser where login=@login and pwd = sha1(@pwd)", this.cnx);
+                    sqlcmd.Parameters.AddWithValue("@login", log);
+                    sqlcmd.Parameters.AddWithValue("@pwd", psw);
 
-					this.msg.op_statut = Convert.ToInt32(sqlcmd.ExecuteScalar()) == 1;
-				}
-				catch (Exception ex)
-				{
-					throw new Exception(ex.ToString());
-				}
-			}
+                    Console.Write("Response request SQL " + sqlcmd.ExecuteScalar());
 
-			return this.msg;
-		}
-	}
+                    this.msg.op_statut = Convert.ToInt32(sqlcmd.ExecuteScalar()) == 1;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+                }
+            }
+        }
+    }
 }
