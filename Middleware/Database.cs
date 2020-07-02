@@ -32,10 +32,6 @@ namespace Middleware
             string log = msg.user_login;
             string psw = msg.user_psw;
 
-            // temp value for simulate database
-            this.msg.op_statut = (msg.user_psw == "123");
-            return this.msg;
-
             using (SqlConnection cnx = new SqlConnection(this.cnx.ConnectionString))
             {
                 try
@@ -56,6 +52,8 @@ namespace Middleware
                     throw new Exception(ex.ToString());
                 }
             }
+
+            return this.msg;
         }
     }
 }
