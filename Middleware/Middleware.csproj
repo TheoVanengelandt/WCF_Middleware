@@ -67,7 +67,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="STC_MSG.cs" />
-    <Compile Include="SQL_Request.cs" />
     <Compile Include="Web References\proxyDecrypt\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

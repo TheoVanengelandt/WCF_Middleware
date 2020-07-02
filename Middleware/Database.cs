@@ -4,49 +4,56 @@ using System.Data.SqlClient;
 
 namespace Middleware
 {
-	internal class Database
-	{
+    internal class Database
+    {
+        private STC_MSG msg;
 
-		private STC_MSG msg;
-		private SqlCommand cmd;
-		private SqlDataAdapter da;
-		private SqlConnection cnx;
+        private readonly SqlConnection cnx;
 
-		private string rq_sql;
-		private string cnx_string;
+        public Database()
+        {
+            this.msg = new STC_MSG();
+            this.cnx = new SqlConnection();
 
-		private DataSet ds;
+            //information about the remote server
+            string server = "51.210.103.59";
+            string port = "3306";
+            string database = "ProjetDev_db";
+            string username = "sa";
+            string password = "Exiacesi62000";
 
-		public Database()
-		{
-			this.msg = new STC_MSG();
-			this.cmd = new SqlCommand();
-			this.cnx = new SqlConnection();
-			this.da = new SqlDataAdapter();
-			this.ds = new DataSet();
+            this.cnx.ConnectionString = "Data Source=" + server + "," + port + ";Initial Catalog=" + database + ";User Id=" + username + ";Password=" + password + ";";
+        }
 
-			this.cnx_string = @"Data Source=EXIAAIX\MANUSERV;Initial Catalog=DB_EXIA_WCF;User ID=CNX_DB_WCF;Password=azerty";
-			this.cnx.ConnectionString = this.cnx_string;
-			this.cmd.CommandType = CommandType.Text;
-			this.cmd.Connection = this.cnx;
-		}
+        public STC_MSG SelectByLoginPsw(STC_MSG msg)
+        {
+            this.msg = msg;
 
+            string log = msg.user_login;
+            string psw = msg.user_psw;
 
-		public STC_MSG ActionRows(STC_MSG msg)
-		{
-			return this.msg;
-		}
+            using (SqlConnection cnx = new SqlConnection(this.cnx.ConnectionString))
+            {
+                try
+                {
+                    cnx.Open();
 
-		public STC_MSG GetRows(STC_MSG msg)
-		{
-			this.msg = msg;
-			this.rq_sql = (string)msg.data[0];
-			this.cmd.CommandText = this.rq_sql;
-			this.da.SelectCommand = this.cmd;
-			this.da.Fill(this.ds, (string)msg.data[1]);
-			this.msg.data = new object[1] { (object)this.ds.Tables[0] };
+                    //querie to check if the user's informations match
+                    SqlCommand sqlcmd = new SqlCommand("select count(1) from InfoUser where login=@login and pwd = sha1(@pwd)", this.cnx);
+                    sqlcmd.Parameters.AddWithValue("@login", log);
+                    sqlcmd.Parameters.AddWithValue("@pwd", psw);
 
-			return this.msg;
-		}
-	}
+                    Console.Write("Response request SQL " + sqlcmd.ExecuteScalar());
+
+                    this.msg.op_statut = Convert.ToInt32(sqlcmd.ExecuteScalar()) == 1;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+                }
+            }
+
+            return this.msg;
+        }
+    }
 }
