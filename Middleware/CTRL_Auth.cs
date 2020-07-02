@@ -8,8 +8,7 @@ namespace Middleware
 	class CTRL_Auth : ICTRL_Auth
 	{
 		private STC_MSG msg;
-		private SQL_Request sql;
-		private Database db;
+		private readonly Database db;
 
 		public CTRL_Auth()
 		{
@@ -21,21 +20,13 @@ namespace Middleware
 		{
 			this.msg = msg;
 
-			// L'orchestration et la gestion transactionnelle doivent être mise en oeuvre ici.
-			/*
-			int count = -1;
+			// Set auth at false before db auth
+			this.msg.op_statut = false;
 
-			this.sql = new SQL_Request();
-			this.msg = this.sql.SelectByLoginPsw(this.msg);
+			this.msg = this.db.SelectByLoginPsw(this.msg);
 
-			this.msg.data = new object[2] { this.msg.data[0], (object)"resultat" };
-			this.msg = this.db.GetRows(this.msg);
-
-			count = ((System.Data.DataTable)this.msg.data[0]).Rows.Count;
-
-			if (count == 1)
-			*/
-			if(msg.user_login == "theo" && msg.user_psw =="123")
+			if (this.msg.op_statut)
+			// if (msg.user_login == "theo" && msg.user_psw =="123")
 			{
 				this.msg.op_info = "succes";
 				this.msg.op_statut = true;
