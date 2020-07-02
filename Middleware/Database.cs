@@ -19,13 +19,10 @@ namespace Middleware
 			string server = "51.210.103.59";
 			string port = "3306";
 			string database = "ProjetDev_db";
-			string username = "admincesi";
-			string password = "cesiexia";
+			string username = "sa";
+			string password = "Exiacesi62000";
 
-			// this.cnx.ConnectionString = "server=" + server + ";port=" + port + ";database=" + database + ";uid=" + username + ";pwd=" + password + ";";
-			// string ConnectionString = "server=" + server + ":" + port + ";database=" + database + ";uid=" + username + ";pwd=" + password + ";";
-			// this.cnx.ConnectionString = "Network Library=DBMSSOCN;Data Source=" + server + "," + port + ";Initial Catalog=" + database + ";User Id=" + username + ";Password=" + password + ";";
-			this.cnx.ConnectionString = "Data Source=" + server + "," + port + ";Initial Catalog=" + database + ";User Id=" + username + ";Password=" + password + ";";
+			this.cnx.ConnectionString = "Data Source=" + server + ";Initial Catalog=" + database + ";User Id=" + username + ";Password=" + password + ";";
 		}
 
 		public STC_MSG SelectByLoginPsw(STC_MSG msg)
@@ -35,14 +32,14 @@ namespace Middleware
 			string log = msg.user_login;
 			string psw = msg.user_psw;
 
-			using(SqlConnection cnx = new SqlConnection(this.cnx.ConnectionString))
+			using (SqlConnection cnx = new SqlConnection(this.cnx.ConnectionString))
 			{
 				try
 				{
 					cnx.Open();
 
 					//querie to check if the user's informations match
-					SqlCommand sqlcmd = new SqlCommand("select count(1) from infouser where login=@login and pwd = sha1(@pwd)", this.cnx);
+					SqlCommand sqlcmd = new SqlCommand("select count(1) from InfoUser where login=@login and pwd = sha1(@pwd)", this.cnx);
 					sqlcmd.Parameters.AddWithValue("@login", log);
 					sqlcmd.Parameters.AddWithValue("@pwd", psw);
 
