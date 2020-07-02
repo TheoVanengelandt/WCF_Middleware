@@ -6,7 +6,6 @@ namespace Middleware
 {
 	internal class Database
 	{
-
 		private STC_MSG msg;
 
 		private readonly SqlConnection cnx;
@@ -27,7 +26,6 @@ namespace Middleware
 			// string ConnectionString = "server=" + server + ":" + port + ";database=" + database + ";uid=" + username + ";pwd=" + password + ";";
 			// this.cnx.ConnectionString = "Network Library=DBMSSOCN;Data Source=" + server + "," + port + ";Initial Catalog=" + database + ";User Id=" + username + ";Password=" + password + ";";
 			this.cnx.ConnectionString = "Data Source=" + server + "," + port + ";Initial Catalog=" + database + ";User Id=" + username + ";Password=" + password + ";";
-
 		}
 
 		public STC_MSG SelectByLoginPsw(STC_MSG msg)
